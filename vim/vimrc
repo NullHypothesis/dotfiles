@@ -61,8 +61,17 @@ set directory=~/.vim/sessions
 " Sets the character encoding used inside Vim.
 set encoding=utf8
 
+" Characters to fill the statuslines and vertical separators.
+set fillchars=vert:\ ,fold:<
+
+" Close fold when cursor isn't in it and when set to "all".
+set foldclose=all
+
 " The kind of folding used for the current window.
 set foldmethod=marker
+
+" All folds will be opened when the cursor moves into a closed field.
+set foldopen=all
 
 " Cursor is a block for n/v/c mode.
 set guicursor=n-v-c:block-Cursor
