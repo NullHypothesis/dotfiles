@@ -52,6 +52,9 @@ set backupdir=~/.vim/sessions
 " Highlight the screen line of the cursor.
 set cursorline
 
+" Define dictionary file for word completion.
+set dictionary=/usr/share/dict/words
+
 " List of directory names for the swap file, separated with commas.
 set directory=~/.vim/sessions
 
