@@ -1,0 +1,191 @@
+" Specify the character encoding used in the script.
+scriptencoding utf-8
+
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+" Mappings
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" map:  normal, visual, operator-pending
+" map!: insert, command-line
+" nmap: normal
+" vmap: visual
+" omap: operator-pending
+" cmap: command-line
+" imap: insert
+" lmap: insert, command-line, lang-arg
+
+" Switch from file.c to file.h and vice versa using <F4>.
+map <F4> :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR> 
+
+" Reload config file.
+map <F5> :source ~/.vimrc<CR>
+
+" Call aspell when pressing <F12>.
+map <F12> :w!<CR>:!aspell --lang=en-common check %<CR>:e! %<CR>
+
+" Treat wrapped lines like actual lines when moving the cursor.
+nmap j gj
+nmap k gk
+
+" Trigger NERDTree using \e.
+nmap \e :NERDTreeToggle<CR>
+
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+" Options
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" Switch on syntax highlighting.
+syntax on
+
+" Copy indent from current line when starting a new line.
+set autoindent
+
+" List of directories for the backup file, separated with commas.
+set backupdir=~/.vim/sessions
+
+" Highlight the screen line of the cursor.
+set cursorline
+
+" List of directory names for the swap file, separated with commas.
+set directory=~/.vim/sessions
+
+" The kind of folding used for the current window.
+set foldmethod=marker
+
+" Cursor is a block for n/v/c mode.
+set guicursor=n-v-c:block-Cursor
+
+" Don't blink in n/v/c mode.
+set guicursor+=n-v-c:blinkon0
+
+" Cursor is a vertical line for insert mode.
+set guicursor+=i:ver25-iCursor
+
+" Set font for GUI.
+set guifont=Monospace\ 8
+
+" Remove titlebar.
+set guioptions-=T
+
+" Remove menubar.
+set guioptions-=m
+
+" The case of normal letters is ignored.
+set ignorecase
+
+" The number of executed command lines to remember.
+set history=100
+
+" When there is a previous search pattern, highlight all its matches.
+set hlsearch
+
+" While typing a search command, show where the pattern, as it was typed so far,
+" matches.
+set incsearch
+
+" When doing keyword completion, the case of the match is adjusted depending on
+" the typed text. 
+set infercase
+
+" The last window will always have a status line.
+set laststatus=2
+
+" Make whitespace characters visible.
+set list
+
+" Tenths of a second to show the matching paren, when 'showmatch' is set.
+set matchtime=3
+
+" Enable mouse use in all modes.
+set mouse=a
+
+" No compatibility with vi(1) means being more useful.
+set nocompatible
+
+" Don't ring the bell (beep or screen flash) for error messages.
+set noerrorbells
+
+" In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
+set noexpandtab
+
+" Precede each line with its line number.
+set number
+
+" Minimal number of screen lines to keep above and below the cursor.
+set scrolloff=5
+
+" Number of spaces for each step of (auto)indent.
+set shiftwidth=4
+
+" Show (partial) command in the last line of the screen.
+set showcmd
+
+" When a bracket is inserted, briefly jump to the matching one.
+set showmatch
+
+" The minimal number of screen columns to keep to the left and to the right of
+" the cursor if 'nowrap' is set.
+set sidescrolloff=3
+
+" Make search case sensitive when capital letters are used.
+set smartcase
+
+" Do smart autoindenting when starting a new line.
+set smartindent
+
+" Create status bar at the bottom of the window.
+set statusline=
+set statusline+=%f\                          " file name
+set statusline+=%h%m%r%w                     " flags
+set statusline+=\[%{strlen(&ft)?&ft:'none'}, " filetype
+set statusline+=%{&encoding},                " encoding
+set statusline+=%{&fileformat}]              " file format
+set statusline+=%=                           " right align
+set statusline+=0x%-8B\                      " current char
+set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
+
+" A <Tab> counts for 4 number of spaces.
+set tabstop=4
+
+" Encoding used for the terminal.
+set termencoding=utf-8
+
+" Maximum width of text that is being inserted before a line break.
+set textwidth=80
+
+" Number of colors.
+set t_Co=256
+
+" When 'wildmenu' is on, command-line completion operates in an enhanced mode.
+set wildmenu
+
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+" Colors
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+colorscheme zenburn
+
+if has('gui_running')
+	colorscheme ir_black
+
+	" Cursor colors for insert mode.
+	highlight iCursor guifg=white guibg=red
+	highlight Cursor guifg=red guibg=blue
+endif
+
+if (&termencoding == "utf-8")
+	"set list listchars=tab:»·,trail:·
+	set listchars=tab:→\ ,trail:·
+else
+	set listchars=tab:>-,trail:-
+endif
+
+iabbrev dts <C-R>=strftime("(%d %b %Y, %I:%M%P)")<CR>
+
+autocmd FileType tex    set textwidth=100
+autocmd FileType c,cpp,python,tex hi OverLength ctermbg=Red      ctermfg=240        guibg=#592929
+autocmd FileType c,cpp,python match OverLength /\%81v.\+/
+autocmd FileType tex match OverLength /\%101v.\+/
