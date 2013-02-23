@@ -1,0 +1,54 @@
+URxvt.termName: rxvt-256color
+
+! Make URLs clickable and open them in chromium.
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher:     chromium-browser
+URxvt.matcher.button:  1
+
+! Cursor, terminal foreground & background.
+URxvt.cursorColor: #0000ff
+URxvt.background:  #111111
+URxvt.foreground:  #eeeeee
+
+! Color underlines text.
+URxvt.colorUL:     #76cd3c
+
+! Let the cursor blink.
+URxvt.cursorBlink: true
+
+! Large scrollback buffer.
+URxvt.saveLines:   8192
+
+! Style of scrollbar.
+URxvt.scrollstyle: plain
+
+! Same font for all styles.
+URxvt*font:           -xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso10646-1
+URxvt*boldFont:       -xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso10646-1
+URxvt*italicFont:     -xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso10646-1
+URxvt*boldItalicFont: -xos4-terminus-medium-r-normal--12-120-72-72-c-60-iso10646-1
+
+! Black + red.
+URxvt*color0:  #000000
+URxvt*color1:  #e01010
+! Green + yellow.
+URxvt*color2:  #00AA00
+URxvt*color3:  #FFFF00
+! Blue + purple.
+URxvt*color4:  #034079
+URxvt*color5:  #A020F0
+! Cyan + white.
+URxvt*color6:  #5B5BC7
+URxvt*color7:  #fefefe
+! Bright-black + bright-red.
+URxvt*color8:  #6a6a6a
+URxvt*color9:  #FF5555
+! Bright-green + bright-yellow.
+URxvt*color10: #90EE90
+URxvt*color11: #ffff2f
+! Bright-blue + bright-purple.
+URxvt*color12: #307493
+URxvt*color13: #e628ba
+! Bright-cyan + bright-white.
+URxvt*color14: #7D7DFB
+URxvt*color15: #ffffff
