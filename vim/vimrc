@@ -42,6 +42,10 @@ syntax on
 " Copy indent from current line when starting a new line.
 set autoindent
 
+" When a file has been detected to have been changed outside of Vim and it has
+" not been changed inside of Vim, automatically read it again.
+set autoread
+
 " List of directories for the backup file, separated with commas.
 set backupdir=~/.vim/sessions
 
@@ -50,6 +54,9 @@ set cursorline
 
 " List of directory names for the swap file, separated with commas.
 set directory=~/.vim/sessions
+
+" Sets the character encoding used inside Vim.
+set encoding=utf8
 
 " The kind of folding used for the current window.
 set foldmethod=marker
@@ -113,6 +120,9 @@ set noexpandtab
 " Precede each line with its line number.
 set number
 
+" Number of lines to scroll with CTRL-U and CTRL-D commands.
+set scroll=4
+
 " Minimal number of screen lines to keep above and below the cursor.
 set scrolloff=5
 
@@ -145,6 +155,9 @@ set statusline+=%{&fileformat}]              " file format
 set statusline+=%=                           " right align
 set statusline+=0x%-8B\                      " current char
 set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
+
+" Ignore these file extensions when tab completion is used.
+set suffixes+=.pyc
 
 " A <Tab> counts for 4 number of spaces.
 set tabstop=4
