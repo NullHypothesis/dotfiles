@@ -191,6 +191,7 @@ set wildmenu
 " Colors
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
+let g:zenburn_high_Contrast=1
 colorscheme zenburn
 
 if has('gui_running')
