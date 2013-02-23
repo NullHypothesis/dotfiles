@@ -1,0 +1,31 @@
+# No start message.
+startup_message off
+
+# Bigger scrollback buffer.
+defscrollback 1000
+
+# Change default background-color-erase setting.
+defbce "on"
+
+# Set default shell depending on $SHELL.
+shell -$SHELL
+
+# Make the terminal work with 256 colors.
+term "screen-256color-bce"
+
+# LF instead of CRLF in copy mode.
+crlf off
+
+# Status bar at the bottom which contains the list of open windows.
+caption always "%{bk}%-w%{yb}%n %t%{bk}%+w %= %{rk}%l "
+
+# Switch to left/right window with ctrl + {left,right}.
+bindkey ^[Oc next
+bindkey ^[Od prev
+
+# Same behavior but for xterm
+bindkey ^[[1;5C next
+bindkey ^[[1;5D prev
+
+# Termcap entry for window titles.
+termcapinfo xterm*|rxvt*|kterm*|Eterm* hs:ts=\E]0;:fs=\007:ds=\E]0;\007
