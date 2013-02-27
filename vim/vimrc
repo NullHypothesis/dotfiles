@@ -73,6 +73,9 @@ set foldmethod=marker
 " All folds will be opened when the cursor moves into a closed field.
 set foldopen=all
 
+" Required by vim-latexsuite.
+set grepprg=grep\ -nH\ $*
+
 " Cursor is a block for n/v/c mode.
 set guicursor=n-v-c:block-Cursor
 
@@ -133,7 +136,7 @@ set noexpandtab
 set number
 
 " Number of lines to scroll with CTRL-U and CTRL-D commands.
-set scroll=4
+set scroll=8
 
 " Minimal number of screen lines to keep above and below the cursor.
 set scrolloff=5
@@ -210,6 +213,11 @@ else
 endif
 
 iabbrev dts <C-R>=strftime("(%d %b %Y, %I:%M%P)")<CR>
+
+" Required by vim-latexsuite.
+filetype plugin on
+filetype indent on
+let g:tex_flavor='latex'
 
 autocmd FileType tex    set textwidth=100
 autocmd FileType c,cpp,python,tex hi OverLength ctermbg=Red      ctermfg=240        guibg=#592929
