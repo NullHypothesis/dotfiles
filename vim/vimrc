@@ -32,6 +32,7 @@ nmap k gk
 nmap \e :NERDTreeToggle<CR>
 
 
+
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 " Options
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
@@ -65,13 +66,13 @@ set encoding=utf8
 set fillchars=vert:\ ,fold:<
 
 " Close fold when cursor isn't in it and when set to "all".
-set foldclose=all
+" set foldclose=all
 
 " The kind of folding used for the current window.
-set foldmethod=marker
+" set foldmethod=marker
 
 " All folds will be opened when the cursor moves into a closed field.
-set foldopen=all
+" set foldopen=all
 
 " Required by vim-latexsuite.
 set grepprg=grep\ -nH\ $*
@@ -160,6 +161,9 @@ set smartcase
 " Do smart autoindenting when starting a new line.
 set smartindent
 
+" Do spell checking for en_GB
+set spell spelllang=en_gb
+
 " Create status bar at the bottom of the window.
 set statusline=
 set statusline+=%f\                          " file name
@@ -181,7 +185,7 @@ set tabstop=4
 set termencoding=utf-8
 
 " Maximum width of text that is being inserted before a line break.
-set textwidth=80
+set textwidth=79
 
 " Number of colors.
 set t_Co=256
@@ -218,8 +222,14 @@ iabbrev dts <C-R>=strftime("(%d %b %Y, %I:%M%P)")<CR>
 filetype plugin on
 filetype indent on
 let g:tex_flavor='latex'
+let g:tex_comment_nospell=1
+let g:Tex_DefaultTargetFormat='pdf'
 
 autocmd FileType tex    set textwidth=100
-autocmd FileType c,cpp,python,tex hi OverLength ctermbg=Red      ctermfg=240        guibg=#592929
-autocmd FileType c,cpp,python match OverLength /\%81v.\+/
-autocmd FileType tex match OverLength /\%101v.\+/
+"autocmd FileType c,cpp,python,tex hi OverLength ctermbg=Red      ctermfg=240        guibg=#592929
+"autocmd FileType c,cpp,python match OverLength /\%81v.\+/
+"autocmd FileType tex match OverLength /\%101v.\+/
+
+set cc=+1  " highlight column after 'textwidth'
+":set cc=+1,+2,+3  " highlight three
+hi ColorColumn ctermbg=236 guibg=grey
