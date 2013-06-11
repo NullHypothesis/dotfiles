@@ -225,6 +225,9 @@ let g:tex_flavor='latex'
 let g:tex_comment_nospell=1
 let g:Tex_DefaultTargetFormat='pdf'
 
+" Expand <Tab> when writing Python in accordance with PEP8.
+autocmd FileType python set expandtab
+
 autocmd FileType tex    set textwidth=100
 "autocmd FileType c,cpp,python,tex hi OverLength ctermbg=Red      ctermfg=240        guibg=#592929
 "autocmd FileType c,cpp,python match OverLength /\%81v.\+/
