@@ -22,7 +22,7 @@ map <F4> :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
 map <F5> :source ~/.vimrc<CR>
 
 " Call aspell when pressing <F12>.
-map <F12> :w!<CR>:!aspell --lang=en-common check %<CR>:e! %<CR>
+" map <F12> :w!<CR>:!aspell --lang=en-common check %<CR>:e! %<CR>
 
 " Treat wrapped lines like actual lines when moving the cursor.
 nmap j gj
@@ -46,6 +46,8 @@ set autoindent
 " When a file has been detected to have been changed outside of Vim and it has
 " not been changed inside of Vim, automatically read it again.
 set autoread
+
+set backspace=indent,eol,start
 
 " List of directories for the backup file, separated with commas.
 set backupdir=~/.vim/sessions
@@ -99,7 +101,7 @@ set guioptions-=m
 set ignorecase
 
 " The number of executed command lines to remember.
-set history=100
+set history=1000
 
 " When there is a previous search pattern, highlight all its matches.
 set hlsearch
@@ -136,11 +138,17 @@ set noexpandtab
 " Precede each line with its line number.
 set number
 
+" Show the line and column number of the cursor position, separated by a comma.
+set ruler
+
 " Number of lines to scroll with CTRL-U and CTRL-D commands.
 set scroll=8
 
 " Minimal number of screen lines to keep above and below the cursor.
 set scrolloff=5
+
+" Round indent to multiple of 'shiftwidth'.
+set shiftround
 
 " Number of spaces for each step of (auto)indent.
 set shiftwidth=4
