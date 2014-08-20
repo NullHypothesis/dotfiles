@@ -90,6 +90,8 @@ set guicursor+=i:ver25-iCursor
 
 " Set font for GUI.
 set guifont=Monospace\ 8
+set guifont=Terminus\ 8
+set guifont=Ubuntu\ Mono\ 10
 
 " Remove titlebar.
 set guioptions-=T
