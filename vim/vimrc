@@ -244,10 +244,9 @@ if has('gui_running')
 endif
 
 if (&termencoding == "utf-8")
-	"set list listchars=tab:»·,trail:·
-	set listchars=tab:→\ ,trail:·
+	set listchars=tab:→\ ,trail:·,extends:>,precedes:<,nbsp:+
 else
-	set listchars=tab:>-,trail:-
+	set listchars=tab:>\ ,trail:-
 endif
 
 iabbrev dts <C-R>=strftime("(%d %b %Y, %I:%M%P)")<CR>
