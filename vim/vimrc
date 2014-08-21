@@ -171,6 +171,9 @@ set smartcase
 " Do smart autoindenting when starting a new line.
 set smartindent
 
+" Do something smart when inserting a <Tab> in front of a line.
+set smarttab
+
 " Do spell checking for en_GB
 set spell spelllang=en_gb
 
