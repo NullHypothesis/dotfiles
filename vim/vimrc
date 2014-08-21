@@ -212,6 +212,23 @@ if maparg('<C-L>', 'n') ==# ''
 endif
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+" Toggled options
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+
+" Toggle spellchecking when F12 is pressed.
+nnoremap <F12> :call ToggleSpellcheck()<CR>
+function! ToggleSpellcheck()
+  if &spell == 'a'
+    setlocal spell spelllang=en_gb
+    echo "Enabling spellcheck."
+  else
+    setlocal nospell
+    echo "Disabling spellcheck."
+  endif
+endfunction
+
+
+" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 " Colors
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
