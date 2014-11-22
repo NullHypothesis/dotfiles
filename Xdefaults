@@ -1,8 +1,11 @@
 URxvt.termName: rxvt-256color
 
-! Make URLs clickable and open them in chromium.
+! Set a taskbar icon.
+URxvt.iconFile: /usr/share/icons/gnome-colors-common/scalable/apps/konsole.svg
+
+! Make URLs clickable and open them in TorBrowser.
 URxvt.perl-ext-common: default,matcher
-URxvt.urlLauncher:     chromium-browser
+URxvt.urlLauncher:     torbrowser
 URxvt.matcher.button:  1
 
 ! Cursor, terminal foreground & background.
