@@ -16,7 +16,7 @@ URxvt.matcher.button:  1
 
 ! Cursor, terminal foreground, and background.
 URxvt.cursorColor: #0000ff
-URxvt.background:  #111111
+URxvt.background:  #1c1c1c
 URxvt.foreground:  #eeeeee
 
 ! Colour underlines text.
