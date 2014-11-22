@@ -1,5 +1,11 @@
 URxvt.termName: rxvt-256color
 
+! Fading percentage of windows which are not active.
+URxvt.fading: 40
+
+! Confirm when pasting multiple lines.
+URxvt.perl-ext: confirm-paste
+
 ! Set a taskbar icon.
 URxvt.iconFile: /usr/share/icons/gnome-colors-common/scalable/apps/konsole.svg
 
@@ -19,8 +25,20 @@ URxvt.colorUL:     #76cd3c
 ! Let the cursor blink.
 URxvt.cursorBlink: true
 
+! Blank the mouse pointer when a key is pressed.
+URxvt.pointerBlank: true
+
+! Use an underline as cursor.
+URxvt.cursorUnderline: true
+
 ! Large scrollback buffer.
 URxvt.saveLines:   8192
+
+! Enable jump scrolling if there is a lot of text.
+URxvt.jumpScroll: true
+
+! Colour of the scroll bar.
+URxvt.scrollColor: #7f9f7f
 
 ! Style of scrollbar.
 URxvt.scrollstyle: plain
