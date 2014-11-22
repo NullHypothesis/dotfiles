@@ -14,12 +14,12 @@ URxvt.perl-ext-common: default,matcher
 URxvt.urlLauncher:     torbrowser
 URxvt.matcher.button:  1
 
-! Cursor, terminal foreground & background.
+! Cursor, terminal foreground, and background.
 URxvt.cursorColor: #0000ff
 URxvt.background:  #111111
 URxvt.foreground:  #eeeeee
 
-! Color underlines text.
+! Colour underlines text.
 URxvt.colorUL:     #76cd3c
 
 ! Let the cursor blink.
