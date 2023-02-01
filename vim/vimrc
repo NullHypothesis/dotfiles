@@ -1,7 +1,6 @@
 " Specify the character encoding used in the script.
 scriptencoding utf-8
 
-
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 " Mappings
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
@@ -14,15 +13,56 @@ scriptencoding utf-8
 " cmap: command-line
 " imap: insert
 " lmap: insert, command-line, lang-arg
+"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                         Plugin-specific configuration
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" plug's directory for plugins.  Run ":PlugInstall" to install new plugins.
+call plug#begin('~/.vim/plugged')
+
+Plug 'airblade/vim-gitgutter'
+
+Plug 'arcticicestudio/nord-vim'
+
+Plug 'junegunn/goyo.vim'
+
+Plug 'ajmwagar/vim-deus'
+
+Plug 'preservim/nerdtree'
+
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+Plug 'dense-analysis/ale'
+
+call plug#end()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                   Mappings
+"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Use F2 and F3 to switch between tabs.
+map <F2> gt<CR>
+map <F3> gT<CR>
 
 " Switch from file.c to file.h and vice versa using <F4>.
-map <F4> :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR> 
+map <F4> :e %:p:s,.h$,.X123X,:s,.c$,.h,:s,.X123X$,.c,<CR>
+
+" Toggle Tagbar.
+map <F8> :TagbarToggle<CR>
 
 " Reload config file.
-map <F5> :source ~/.vimrc<CR>
+nmap <F5> :source ~/.vim/vimrc<CR>
+
+" imap -- -
+" imap --- —
+" imap thx<CR> Thanks for setting up a bridge!  I tested it and it works just fine.
 
 " Call aspell when pressing <F12>.
-" map <F12> :w!<CR>:!aspell --lang=en-common check %<CR>:e! %<CR>
+map <F12> :w!<CR>:!aspell --lang=en-US check %<CR>:e! %<CR>
 
 " Treat wrapped lines like actual lines when moving the cursor.
 nmap j gj
@@ -31,6 +71,10 @@ nmap k gk
 " Trigger NERDTree using \e.
 nmap \e :NERDTreeToggle<CR>
 
+" Replace links like <https://trac.torproject.org/projects/tor/ticket/30512>
+" with links of the form <https://bugs.torproject.org/30512> by pressing \b in
+" normal mode.
+nmap \b :% s/https:\/\/trac\.torproject\.org\/projects\/tor\/ticket\/\(\d\+\)\(#ticket\)\?/https:\/\/bugs\.torproject\.org\/\1/g<CR>
 
 
 " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
@@ -49,8 +93,11 @@ set autoread
 
 set backspace=indent,eol,start
 
+" Use rename-and-write-new method whenever safe.
+set backupcopy=auto
+
 " List of directories for the backup file, separated with commas.
-set backupdir=~/.vim/sessions
+set backupdir^=~/.vim/sessions//
 
 " Highlight the screen line of the cursor.
 set cursorline
@@ -58,8 +105,13 @@ set cursorline
 " Define dictionary file for word completion.
 set dictionary=/usr/share/dict/words
 
+" Protect changes between writes.  Default values of updatecount (200
+" keystrokes) and updatetime (4 seconds) are fine.  Taken from:
+" <https://begriffs.com/posts/2019-07-19-history-use-vim.html?hn=3>
+set swapfile
+
 " List of directory names for the swap file, separated with commas.
-set directory=~/.vim/sessions
+set directory^=~/.vim/sessions
 
 " Sets the character encoding used inside Vim.
 set encoding=utf8
@@ -89,9 +141,7 @@ set guicursor+=n-v-c:blinkon0
 set guicursor+=i:ver25-iCursor
 
 " Set font for GUI.
-set guifont=Monospace\ 8
-set guifont=Terminus\ 8
-set guifont=Ubuntu\ Mono\ 10
+set guifont=Roboto\ Mono\ Regular\ 8
 
 " Remove titlebar.
 set guioptions-=T
@@ -113,7 +163,7 @@ set hlsearch
 set incsearch
 
 " When doing keyword completion, the case of the match is adjusted depending on
-" the typed text. 
+" the typed text.
 set infercase
 
 " The last window will always have a status line.
@@ -126,7 +176,10 @@ set list
 set matchtime=3
 
 " Enable mouse use in all modes.
-set mouse=a
+set mouse=r
+
+" Don't keep backup file after writing to disk.
+set nobackup
 
 " No compatibility with vi(1) means being more useful.
 set nocompatible
@@ -134,11 +187,11 @@ set nocompatible
 " Don't ring the bell (beep or screen flash) for error messages.
 set noerrorbells
 
-" In Insert mode: Use the appropriate number of spaces to insert a <Tab>.
-set noexpandtab
+" Expand tabs to spaces in insert mode.
+set expandtab
 
-" Precede each line with its line number.
-set number
+" Use hybrid line numbers -- a mixture of absolute and relative numbers.
+set number relativenumber
 
 " Show the line and column number of the cursor position, separated by a comma.
 set ruler
@@ -154,6 +207,9 @@ set shiftround
 
 " Number of spaces for each step of (auto)indent.
 set shiftwidth=4
+
+" Show at beginning of wrapped lines.
+set showbreak=↳\
 
 " Show (partial) command in the last line of the screen.
 set showcmd
@@ -173,9 +229,6 @@ set smartindent
 
 " Do something smart when inserting a <Tab> in front of a line.
 set smarttab
-
-" Do spell checking for en_GB
-set spell spelllang=en_gb
 
 " Create status bar at the bottom of the window.
 set statusline=
@@ -198,22 +251,34 @@ set tabstop=4
 set termencoding=utf-8
 
 " Maximum width of text that is being inserted before a line break.
-set textwidth=79
+set textwidth=80
 
 " Number of colors.
 set t_Co=256
+" set t_Co=16
+
+" Persist the undo tree for each file.
+" set undofile
+" set undodir^=~/.vim/undo//
+
+" For vim-gitgutter to update faster:
+" <https://github.com/airblade/vim-gitgutter>
+set updatetime=100
+
+" Make it easy to edit, say, tabular data by just clicking anywhere in the
+" window to add text.
+" set virtualedit=all
 
 " When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 set wildmenu
 
+" Have backup file only for writing to disk and delete it on success.
+set writebackup
+
 " Use <C-L> to clear the highlighting of :set hlsearch.
 if maparg('<C-L>', 'n') ==# ''
-	nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
+  nnoremap <silent> <C-L> :nohlsearch<CR><C-L>
 endif
-
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-" Toggled options
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
 
 " Toggle spellchecking when F12 is pressed.
 nnoremap <F12> :call ToggleSpellcheck()<CR>
@@ -227,29 +292,33 @@ function! ToggleSpellcheck()
   endif
 endfunction
 
+let g:ale_linters = {
+\   'javascript': ['standard'],
+\}
+let g:ale_fixers = {'javascript': ['standard']}
+let g:ale_lint_on_save = 1
+let g:ale_fix_on_save = 1
 
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
-" Colors
-" " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " " "
+" Automatically run gofmt(1) when saving a file.
+let g:go_fmt_command = "gofmt"
+let g:go_fmt_options = "-s"
+" let g:go_fmt_options = {
+"     \ 'gofmt': '-s',
+"     \ }
 
-let g:zenburn_high_Contrast=1
-colorscheme zenburn
+" Automatically use powerline fonts.
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
-if has('gui_running')
-	colorscheme ir_black
+" Don't let the Terminus plugin override my mouse configuration.
+let g:TerminusMouse=0
 
-	" Cursor colors for insert mode.
-	highlight iCursor guifg=white guibg=red
-	highlight Cursor guifg=red guibg=blue
-endif
-
-if (&termencoding == "utf-8")
-	set listchars=tab:→\ ,trail:·,extends:>,precedes:<,nbsp:+
-else
-	set listchars=tab:>\ ,trail:-
-endif
-
-iabbrev dts <C-R>=strftime("(%d %b %Y, %I:%M%P)")<CR>
+" The documentation of indentLine is available at:
+" https://github.com/Yggdroot/indentLine/blob/master/doc/indentLine.txt
+let g:indentLine_color_term = 236
+let g:indentLine_bgcolor_term = 256
+" let g:indentLine_fileType = ['py']
+let g:indentLine_setConceal = 0
 
 " Required by vim-latexsuite.
 filetype plugin on
@@ -258,11 +327,76 @@ let g:tex_flavor='latex'
 let g:tex_comment_nospell=1
 let g:Tex_DefaultTargetFormat='pdf'
 
-" Expand <Tab> when writing Python in accordance with PEP8.
-autocmd FileType python    set expandtab
-autocmd FileType gitcommit set textwidth=72
-autocmd FileType bib       set textwidth=0
+
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+
+" colorscheme Tomorrow-Night
+colorscheme nord
+
+" Display tabs and trailing spaces.
+if (&termencoding == "utf-8")
+  set listchars=tab:→\ ,trail:·,extends:>,precedes:<,nbsp:+
+else
+  set listchars=tab:>\ ,trail:-
+endif
+
+iabbrev dts <C-R>=strftime("%Y-%m-%d")<CR>
+iabbrev witem <C-R>=strftime("- %T:")<CR>
+
+" Jump to the latest position when re-opening a file.  This is unpleasant when
+" dealing with git commit messages.
+" if has("autocmd")
+"   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" endif
+
+augroup vimrc_autocmd
+    autocmd!
+    " Expand <Tab> when writing Python in accordance with PEP8.
+    " autocmd BufWritePost *.py  call Flake8()
+    autocmd FileType python    set expandtab textwidth=79
+    autocmd FileType gitcommit set textwidth=72
+    autocmd FileType bib       set textwidth=0 noexpandtab
+    autocmd FileType go        compiler go
+    autocmd FileType go        set textwidth=0
+    autocmd FileType go        set colorcolumn=80
+    autocmd FileType html      set textwidth=0
+    autocmd FileType html      set colorcolumn=100
+    autocmd FileType markdown  set shiftwidth=2
+    " Very slow in LaTeX.
+    autocmd FileType tex       :NoMatchParen
+    autocmd FileType tex       set nocursorline shiftwidth=2
+augroup END
 
 set cc=+1  " highlight column after 'textwidth'
 ":set cc=+1,+2,+3  " highlight three
 hi ColorColumn ctermbg=236 guibg=grey
+
+hi SpellBad   ctermbg=0  ctermfg=250
+hi SpellLocal ctermbg=58 ctermfg=250
+hi SpellRare  ctermbg=22 ctermfg=250
+hi SpellCap   ctermbg=57 ctermfg=250
+
+" Some Linux distributions set filetype in /etc/vimrc.
+" Clear filetype flags before changing runtimepath to force Vim to reload them.
+if exists("g:did_load_filetypes")
+  filetype off
+  filetype plugin indent off
+endif
+set runtimepath+=/home/phw/sw/golang/misc/vim
+filetype plugin indent on
+
+set runtimepath-=~/.vim/bundle/vimacs
+
+set conceallevel=0
+
+" execute pathogen#infect()
+
+hi Normal guibg=NONE ctermbg=NONE
+
+
